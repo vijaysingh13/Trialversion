@@ -1,0 +1,42 @@
+<!-- select.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ main_folder }} Data</title>
+    <!-- Add your styles here -->
+</head>
+<body>
+    <div>
+        <!-- Add your header content here -->
+    </div>
+    <div>
+        {% if subfolders %}
+            <h2><u>Please select the Subfolder</u></h2>
+            <form action="/select_subfolder" method="post">
+                <input type="hidden" name="main_folder" value="{{ main_folder }}">
+                <select name="subfolder">
+                    <option value="" selected disabled hidden></option> <!-- Add an empty option -->
+                    {% for subfolder in subfolders %}
+                        <option value="{{ subfolder }}">{{ subfolder }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+        {% else %}
+            <!-- Display data as before -->
+            {% for sheet_name, sheet_data in data.items() %}
+                <h2>{{ sheet_name }}</h2>
+                <table>
+                    {% for row in sheet_data %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

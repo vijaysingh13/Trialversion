@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ main_folder }} - {{ subfolder }} - Test Report</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: LemonChiffon;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .logo {
+            margin: 10px;
+            width: 100px;
+            height: 80px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        table {
+            margin: 10px;
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        tr:first-child th,
+        tr:first-child td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="https://intranet.quest-global.com/intranet/getattachment/logo2.png.aspx?lang=en-US" alt="logo" class="logo">
+        <h2>{{ main_folder }} - {{ subfolder }} - Test Report</h2>
+
+        {% for sheet_name, data in all_data.items() %}
+            <table>
+                <tr>
+                    {% for col in data[0].keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in data %}
+                    <tr>
+                        {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    </div>
+</body>
+</html>

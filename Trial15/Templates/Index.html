@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reliance Jio Automation Testing Report</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: LemonChiffon;
+        }
+
+        h1 {
+            text-align: center;
+            position: relative;
+            margin-top: 0;
+        }
+        h2 {
+            text-align: center;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px;
+            width: 100px;
+            height: 80px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        select,
+        input[type="submit"] {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <img src="https://intranet.quest-global.com/intranet/getattachment/logo2.png.aspx?lang=en-US" alt="logo" class="logo">
+        <u>Reliance Jio</u>
+        <br>
+        <u>Automation Testing Report Generation</u>
+        </br>
+    </h1>
+    <h2><u>Please select the Model</u></h2>
+    <form action="/" method="post">
+        <select name="main_folder">
+            <option value="" selected disabled hidden></option>
+            {% for main_folder in main_folders %}
+                <option value="{{ main_folder }}" {% if main_folder == selected_main_folder %}selected{% endif %}>{{ main_folder }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if subfolders %}
+        <h2><u>Select Month Of Release</u></h2>
+        <form action="/select_subfolder" method="post">
+            <input type="hidden" name="main_folder" value="{{ selected_main_folder }}">
+            <select name="subfolder">
+                <option value="" selected disabled hidden></option>
+                {% for subfolder in subfolders %}
+                    <option value="{{ subfolder }}" {% if subfolder == selected_subfolder %}selected{% endif %}>{{ subfolder }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+
+    {% if sheets %}
+        <h2><u>Select Excel Sheet</u></h2>
+        <form action="/display_sheet_data" method="post">
+            <input type="hidden" name="main_folder" value="{{ selected_main_folder }}">
+            <input type="hidden" name="subfolder" value="{{ selected_subfolder }}">
+            <select name="sheet_name">
+                <option value="" selected disabled hidden></option>
+                {% for sheet_name in sheets %}
+                    <option value="{{ sheet_name }}">{{ sheet_name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+</body>
+</html>
