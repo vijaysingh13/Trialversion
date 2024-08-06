@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
 import os
-import webbrowser
-from waitress import serve
 import pandas as pd
 
 app = Flask(__name__)
@@ -51,6 +49,3 @@ def display_sheet_data():
 
     return render_template('display_sheet_data.html', main_folder=selected_main_folder, subfolder=selected_subfolder, sheets=sheets, all_data=all_data)
 
-if __name__ == '__main__':
-    webbrowser.open('http://localhost:5000')
-    serve(app, host='localhost', port=5000)
